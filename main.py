@@ -19,12 +19,19 @@ def fetch_attendance(userid, passwd):
     try:
         w = Webportal()
         s = w.student_login(userid, passwd, CAPTCHA)
+        if not s:
+            raise Exception("Login failed due to CAPTCHA or incorrect credentials.")
         
         meta = w.get_attendance_meta()
+        if not meta:
+            raise Exception("Failed to fetch attendance metadata.")
         header = meta.latest_header()
         sem = meta.latest_semester()
 
         attendance_data = w.get_attendance(header, sem)
+        if 'studentattendancelist' not in attendance_data:
+            raise Exception("Attendance data format incorrect or unavailable.")
+
         
         student_attendance = attendance_data['studentattendancelist']
         return student_attendance
@@ -61,7 +68,7 @@ if st.button("Get Attendance"):
         else:
             for subject in attendance:
                 with st.expander(subject['subjectcode']):
-                    if subject['LTpercantage']:
+                    if subject.get('LTpercantage'):
                         st.write(f"**Overall Percentage:** {subject['LTpercantage']}%")
                     if subject['Ltotalclass']:
                         st.write(f"**Total Lectures:** {subject['Ltotalclass']}")
@@ -74,7 +81,8 @@ if st.button("Get Attendance"):
                     if subject['abseent']:
                         st.write(f"**Absent Classes:** {subject['abseent']}")
 
-            avg_lecture_percentage = pd.DataFrame(attendance)['LTpercantage'].mean()
+
+            avg_lecture_percentage = pd.DataFrame(attendance)['LTpercantage'].astype(float).mean()
             st.write(f"### Average Lecture Attendance: {avg_lecture_percentage:.2f}%")
 
 st.write("Thank you codelif :trophy:")
