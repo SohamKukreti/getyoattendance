@@ -74,6 +74,10 @@ if st.button("Get Attendance"):
                         st.write(f"**Total Lectures:** {subject['Ltotalclass']}")
                     if subject['Ltotalpres']:
                         st.write(f"**Lectures Attended:** {subject['Ltotalpres']}")
+                    if subject['Ttotalclass']:
+                        st.write(f"**Total Tutorials:** {subject['Ttotalclass']}")
+                    if subject['Ttotalpres']:
+                        st.write(f"**Tutorials Attended:** {subject['Ttotalpres']}")
                     if subject['Tpercentage']:
                         st.write(f"**Tutorial Percentage:** {subject['Tpercentage']}%")
                     if subject['Ppercentage']:
