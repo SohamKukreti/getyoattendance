@@ -74,16 +74,16 @@ if st.button("Get Attendance"):
                         st.write(f"**Total Lectures:** {subject['Ltotalclass']}")
                     if subject['Ltotalpres']:
                         st.write(f"**Lectures Attended:** {subject['Ltotalpres']}")
+                        st.write(f"**Lectures missed:** {subject['Ltotalclass'] - subject['Ltotalpres']}")
                     if subject['Ttotalclass']:
                         st.write(f"**Total Tutorials:** {subject['Ttotalclass']}")
                     if subject['Ttotalpres']:
                         st.write(f"**Tutorials Attended:** {subject['Ttotalpres']}")
+                        st.write(f"**Tutorials missed:** {subject['Ttotalclass'] - subject['Ttotalpres']}")
                     if subject['Tpercentage']:
                         st.write(f"**Tutorial Percentage:** {subject['Tpercentage']}%")
                     if subject['Ppercentage']:
                         st.write(f"**Practical Percentage:** {subject['Ppercentage']}%")
-                    if subject['abseent']:
-                        st.write(f"**Absent Classes:** {subject['abseent']}")
 
 
             avg_lecture_percentage = pd.DataFrame(attendance)['LTpercantage'].astype(float).mean()
