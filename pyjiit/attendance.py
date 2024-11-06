@@ -47,6 +47,6 @@ class AttendanceMeta:
         return self.headers[0]
 
     def latest_semester(self):
-        return self.semesters[0]
+        return self.semesters[1]
 
 
