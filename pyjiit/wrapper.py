@@ -199,6 +199,8 @@ class Webportal:
             "registrationid": semester.registration_id,
             "stynumber": header.stynumber
         }
+
+        payload = serialize_payload(payload)
         
         resp = self.__hit("POST", API+ENDPOINT, json=payload, authenticated=True)
         

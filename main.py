@@ -56,7 +56,7 @@ if st.button("Get Attendance"):
         meme_url, meme_title = fetch_random_meme()
         if meme_url:
             text_placeholder.subheader(" Here's a random meme while we get your attendance: ")
-            meme_placeholder.image(meme_url, caption=meme_title, use_column_width=True)
+            meme_placeholder.image(meme_url, caption=meme_title, use_container_width=True)
 
         attendance = fetch_attendance(username, password)
 
